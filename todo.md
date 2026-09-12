@@ -1,0 +1,72 @@
+# Project TODO
+
+- [x] Inspect the provided resume PDF and initial jobs JSON dataset.
+- [x] Define normalized resume, job, match-score, and skill-gap data models.
+- [x] Add a resume-only PDF upload workflow with validation and the supplied resume as the initial example.
+- [x] Store the supplied job descriptions as a backend-managed JSON catalogue; do not expose a jobs upload control.
+- [x] Extract resume skills and compare them with job requirements to rank matching roles.
+- [x] Show per-role match rationale, matched skills, and missing skills.
+- [x] Build an aggregated Areas for Improvement view with priority indicators.
+- [x] Implement gamified progress, match-score, and skill-readiness visualizations.
+- [x] Apply a responsive isometric visual system with translucent teal, blue, and coral geometric planes.
+- [x] Add secure server-side AI insight generation using a user-provided OpenAI API key.
+- [x] Add AI guidance for learning priorities and resume improvements.
+- [x] Write and run Vitest coverage for matching and AI-input validation.
+- [x] Perform responsive visual verification and resolve observed issues.
+- [x] Save a final checkpoint and deliver the finished project.
+- [x] Document resume, job catalogue, matching, and AI insight data handling in the project.
+- [x] Add an iPhone-compatible fallback for resume PDF text extraction.
+- [x] Complete and verify the iPhone-compatible fallback parser route and client wiring.
+- [x] Complete and verify the iPhone-compatible fallback parser route and client wiring.
+- [x] Verify the responsive iPhone upload and dashboard experience.
+- [x] Make the optional external credential probe opt-in so local validation does not depend on a configured OpenAI key.
+- [x] Verify the responsive iPhone upload and dashboard experience.
+- [x] Diagnose the continued iPhone upload failure in in-app browsers.
+- [x] Add a browser-independent manual resume text submission fallback for iPhone users.
+- [x] Document iPhone troubleshooting and confirm the revised mobile flow.
+- [x] Create a technical workflow document with a CareerQuest block diagram.
+- [x] Extract relevant years and domains of experience from the resume.
+- [x] Incorporate experience relevance into the job matching score and match rationale.
+- [x] Add experience-fit details to the matching dashboard.
+- [x] Generate role-aligned certification recommendations in AI insights.
+- [x] Generate a staged skill-improvement action plan in AI insights.
+- [x] Add and run tests for experience-aware matching and enhanced AI validation.
+- [x] Package the latest enhanced CareerQuest source code as a Windows-ready ZIP archive.
+- [x] Fix and verify the Windows development script in the latest downloadable code archive.
+- [x] Remove the Quest progress, Jobs scanned, Skills found, and Career momentum card section from the home dashboard.
+- [x] Validate and replace the server job catalogue with the uploaded jobs.json dataset.
+- [x] Verify matching results use the updated backend job catalogue.
+- [x] Expand the backend top-match result limit from 6 to 25 jobs.
+- [x] Ensure AI insight requests use only the first 6 of the 25 displayed matches.
+- [x] Show up to 10 matched skills and 10 missing skills on each job-match card.
+- [x] Create a CareerQuest proposal PowerPoint covering features, roadmap, and future improvements in no more than 20 slides.
+- [x] Inspect the uploaded Mythri Technopark job portal archive and identify reusable job-discovery features.
+- [x] Combine CareerQuest matching with the portal’s relevant job-discovery experience.
+- [x] Add tutorial recommendations and embedded YouTube learning videos to AI career insights.
+- [x] Finish and validate the combined job explorer and embedded tutorial experience.
+- [x] Route tRPC job-browser queries with GET while retaining POST for mutations.
+- [x] Test and document the unified portal experience.
+- [x] Validate and replace the server job catalogue with the newly uploaded jobs.json dataset.
+- [x] Confirm matching and job discovery operate with the updated catalogue.
+- [x] Add a persistent AI career chatbot for job enquiries, course recommendations, and résumé improvement.
+- [x] Provide automatic quick-select options and an always-available new-question action.
+- [x] Validate secure chatbot responses and responsive interaction behavior.
+- [x] Remove Mythri/Technopark portal branding and the integrated job-explorer interface from CareerQuest.
+- [x] Verify the streamlined CareerQuest matching experience after portal removal.
+- [x] Fix chatbot topic switching so a new question always starts with empty conversation history.
+- [x] Verify all three chatbot quick actions, the new-question reset, and mobile interaction end to end.
+- [x] Verify a complete chatbot quick-action response and new-question reset on an iPhone-sized viewport.
+- [x] Remove the iPhone paste-text resume fallback and keep only the standard PDF upload interface.
+- [x] Cap chatbot conversation-history messages to the server’s 1,600-character validation limit.
+- [x] Verify a chatbot follow-up question succeeds after a long assistant response.
+- [x] Assess and document the supported deployment approach for serving CareerQuest via Nginx on port 80.
+- [x] Provide a no-AWS-Ubuntu deployment option for the requested port-80 setup before the final AWS Ubuntu requirement was confirmed.
+- [x] Prepare an AWS Ubuntu Nginx port-80 deployment configuration without a custom domain.
+- [x] Document the AWS security-group, startup, and verification steps for the Ubuntu deployment.
+- [x] Support a raw OPENAI_API_KEY for chatbot responses outside the managed hosting environment.
+- [x] Fix and verify chatbot follow-up requests after long assistant replies.
+- [x] Publish the verified 1,600-character chatbot-history safeguard for user testing.
+- [x] Save and deliver a version containing the verified chatbot history-length fix.
+- [x] Remove recommended tutorial displays from the CareerQuest chatbot while retaining AI course guidance.
+- [x] Retain the Recommended tutorials display in the main AI insight area; tutorial removal applies to the chatbot only.
+- [ ] Package the complete current CareerQuest source code into a downloadable ZIP archive.

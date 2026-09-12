@@ -1,0 +1,42 @@
+flowchart TB
+  U[Candidate<br/>iPhone / Desktop Browser]
+  UI[React Dashboard<br/>CareerQuest UI]
+  PDF[Resume PDF Picker]
+  CP[Client PDF Text Extraction<br/>PDF.js]
+  MT[Manual Text Fallback<br/>Paste Resume Text]
+  SF[Server PDF Compatibility Parser<br/>Temporary Request Memory]
+  API[tRPC Career API<br/>Express Server]
+  ME[Matching Engine<br/>Skill Extraction + Ranking]
+  JOBS[Backend Job Catalogue<br/>server/data/jobs.json]
+  RESULTS[Dashboard Results<br/>Matches, Skill Gaps, Readiness]
+  AI[Optional AI Insight Request<br/>Derived Skills + Matches + Gaps]
+  OPENAI[OpenAI Responses API]
+  INSIGHTS[Career Plan<br/>Learning + Resume Suggestions]
+  KEY[Server Environment<br/>OPENAI_API_KEY]
+
+  U --> UI
+  UI --> PDF
+  PDF --> CP
+  CP -->|Readable text| API
+  CP -->|Browser PDF extraction fails| SF
+  UI -->|PDF blocked or scanned| MT
+  MT --> API
+  SF --> API
+  API --> ME
+  JOBS --> ME
+  ME --> RESULTS
+  RESULTS --> UI
+  UI -->|User selects Generate AI insight| AI
+  AI --> OPENAI
+  KEY --> OPENAI
+  OPENAI --> INSIGHTS
+  INSIGHTS --> UI
+
+  classDef client fill:#e8fbf8,stroke:#20a89d,color:#173b55,stroke-width:1.5px;
+  classDef server fill:#eef5ff,stroke:#2d7ee8,color:#173b55,stroke-width:1.5px;
+  classDef data fill:#fff5e9,stroke:#ef8b53,color:#173b55,stroke-width:1.5px;
+  classDef optional fill:#fff0ed,stroke:#f27369,color:#173b55,stroke-width:1.5px;
+  class U,UI,PDF,CP,MT,RESULTS client;
+  class API,SF,ME server;
+  class JOBS,KEY data;
+  class AI,OPENAI,INSIGHTS optional;
