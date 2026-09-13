@@ -38,7 +38,7 @@ export function CareerChatbot({ analysis }: { analysis: CareerAnalysisResult | n
   const context = useMemo(() => analysis ? ({
     detectedSkills: analysis.profile.detectedSkills.slice(0, 30),
     experience: analysis.profile.experience,
-    matches: analysis.topMatches.slice(0, 3).map(match => ({
+    matches: analysis.topMatches.slice(0, 10).map(match => ({
       role: match.role,
       company: match.company,
       score: match.score,
