@@ -167,7 +167,7 @@ export function buildCareerAnalysis(resumeText: string, source: CareerAnalysisRe
     return { id: job.id, role: job.job_title, company: job.company_name || "Company not listed", postedDate: job.posted_date || null, url: job.detail_url || null, score, matchedSkills, missingSkills, experienceFit, certificationSignals: extractCertificationSignals(jobText), rationale: createRationale(job.job_title, matchedSkills, missingSkills, score, experienceFit) } satisfies JobMatch;
   }).sort((left, right) => right.score - left.score || right.matchedSkills.length - left.matchedSkills.length || left.role.localeCompare(right.role));
 
-  const topMatches = rankedJobs.slice(0, 25);
+  const topMatches = rankedJobs.slice(0, 50);
   const averageReadiness = topMatches.length ? Math.round(topMatches.reduce((total, match) => total + match.score, 0) / topMatches.length) : 0;
   const coverage = topMatches.length ? Math.round((topMatches.reduce((total, match) => total + match.matchedSkills.length, 0) / Math.max(1, topMatches.reduce((total, match) => total + match.matchedSkills.length + match.missingSkills.length, 0))) * 100) : 0;
   const experienceAlignment = topMatches.length ? Math.round(topMatches.reduce((total, match) => total + match.experienceFit.score, 0) / topMatches.length) : 0;
