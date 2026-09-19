@@ -151,6 +151,31 @@ function makeSkillGaps(matches: JobMatch[]): SkillGap[] {
   } satisfies SkillGap)).sort((left, right) => right.opportunityCount - left.opportunityCount || left.skill.localeCompare(right.skill)).slice(0, 8);
 }
 
+export function calculateMatchScore(
+  coverage: number,
+  matchedSkillCount: number,
+  roleAlignmentBonus: number,
+  experienceScore: number
+) {
+  const coverageScore = coverage * 44;
+  const matchedSkillCountScore = Math.min(28, matchedSkillCount * 4);
+
+  return Math.max(
+    8,
+    Math.min(
+      97,
+      Math.round(
+        10 +
+        coverageScore +
+        matchedSkillCountScore +
+        roleAlignmentBonus +
+        experienceScore * 0.14
+      )
+    )
+  );
+}
+
+
 export function buildCareerAnalysis(resumeText: string, source: CareerAnalysisResult["profile"]["source"]): CareerAnalysisResult {
   const detectedSkills = extractSkills(resumeText);
   const resumeSkillSet = new Set(detectedSkills);
@@ -163,7 +188,8 @@ export function buildCareerAnalysis(resumeText: string, source: CareerAnalysisRe
     const coverage = requiredSkills.length ? matchedSkills.length / requiredSkills.length : 0;
     const technicalEvidence = Math.min(12, matchedSkills.length * 2);
     const experienceFit = makeExperienceFit(job.job_title, experience, extractRequiredYears(jobText));
-    const score = Math.max(8, Math.min(97, Math.round(10 + coverage * 56 + technicalEvidence + roleBonus(job.job_title, resumeSkillSet) + experienceFit.score * 0.14)));
+    //const score = Math.max(8, Math.min(97, Math.round(10 + coverage * 56 + technicalEvidence + roleBonus(job.job_title, resumeSkillSet) + experienceFit.score * 0.14)));
+    const score = calculateMatchScore(coverage, matchedSkills.length,roleBonus(job.job_title,resumeSkillSet),experienceFit.score)
     return { id: job.id, role: job.job_title, company: job.company_name || "Company not listed", postedDate: job.posted_date || null, url: job.detail_url || null, score, matchedSkills, missingSkills, experienceFit, certificationSignals: extractCertificationSignals(jobText), rationale: createRationale(job.job_title, matchedSkills, missingSkills, score, experienceFit) } satisfies JobMatch;
   }).sort((left, right) => right.score - left.score || right.matchedSkills.length - left.matchedSkills.length || left.role.localeCompare(right.role));
 
