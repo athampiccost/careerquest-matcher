@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { browseJobCatalogue, buildCareerAnalysis, extractExperienceProfile, extractSkills } from "./matching";
+import { browseJobCatalogue, buildCareerAnalysis, calculateMatchScore, extractExperienceProfile, extractSkills } from "./matching";
 import { careerChatInputSchema, careerChatResultSchema, careerInsightInputSchema, careerInsightResultSchema, resumeInputSchema } from "./routers/career";
 import { decodeResumePdf, resumePdfLimits } from "./resumePdf";
 
@@ -29,11 +29,38 @@ describe("career matching", () => {
     expect(profile.domains).toEqual(expect.arrayContaining(["Platform & DevOps", "Full-stack Engineering", "Data & AI"]));
   });
 
+  it("gives broader matched skill evidence more weight than a small perfect overlap", () => {
+    const broadMatch = calculateMatchScore(0.75, 6, 0, 50);
+    const narrowPerfectMatch = calculateMatchScore(1, 2, 0, 50);
+    expect(broadMatch).toBeGreaterThan(narrowPerfectMatch);
+    expect(calculateMatchScore(0.75, 10, 0, 50)).toBeGreaterThan(broadMatch);
+  });
+
   it("exposes a filtered, limited, and typed job catalogue for the unified job explorer", () => {
     const catalogue = browseJobCatalogue({ jobType: "all", sortBy: "latest", limit: 12 });
     expect(catalogue.total).toBeGreaterThanOrEqual(25);
     expect(catalogue.jobs).toHaveLength(12);
     expect(catalogue.jobs.every(job => job.role.length > 0 && job.description.length > 0)).toBe(true);
+  });
+
+  it("filters catalogue results by company, position, skill, kind, and date ranges", () => {
+    const companyResults = browseJobCatalogue({ company: "Techversant", limit: 60 });
+    expect(companyResults.jobs.length).toBeGreaterThan(0);
+    expect(companyResults.jobs.every(job => job.company.toLowerCase().includes("techversant"))).toBe(true);
+
+    const positionResults = browseJobCatalogue({ position: "DevOps", skill: "Docker", limit: 60 });
+    expect(positionResults.jobs.length).toBeGreaterThan(0);
+    expect(positionResults.jobs.every(job => job.role.toLowerCase().includes("devops") && job.skills.some(skill => skill.toLowerCase().includes("docker")))).toBe(true);
+
+    const walkInResults = browseJobCatalogue({ jobType: "walk_in", limit: 60 });
+    expect(walkInResults.jobs.every(job => job.jobType === "walk_in")).toBe(true);
+
+    const datedJob = browseJobCatalogue({ limit: 60 }).jobs.find(job => job.postedDate && job.closingDate);
+    expect(datedJob).toBeTruthy();
+    if (datedJob?.postedDate && datedJob.closingDate) {
+      const datedResults = browseJobCatalogue({ openDateFrom: datedJob.postedDate, openDateTo: datedJob.postedDate, closedDateFrom: datedJob.closingDate, closedDateTo: datedJob.closingDate, limit: 60 });
+      expect(datedResults.jobs).toContainEqual(datedJob);
+    }
   });
 });
 

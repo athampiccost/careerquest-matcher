@@ -18,7 +18,14 @@ export const resumePdfInputSchema = z.object({
 
 const jobCatalogueInputSchema = z.object({
   query: z.string().trim().max(100).default(""),
+  company: z.string().trim().max(120).default(""),
+  position: z.string().trim().max(120).default(""),
+  skill: z.string().trim().max(80).default(""),
   jobType: z.enum(["all", "job_posting", "walk_in"]).default("all"),
+  openDateFrom: z.string().regex(/^\d{4}-\d{2}-\d{2}$/).or(z.literal("")).default(""),
+  openDateTo: z.string().regex(/^\d{4}-\d{2}-\d{2}$/).or(z.literal("")).default(""),
+  closedDateFrom: z.string().regex(/^\d{4}-\d{2}-\d{2}$/).or(z.literal("")).default(""),
+  closedDateTo: z.string().regex(/^\d{4}-\d{2}-\d{2}$/).or(z.literal("")).default(""),
   sortBy: z.enum(["latest", "closing", "company"]).default("latest"),
   limit: z.number().int().min(6).max(60).default(12),
 });

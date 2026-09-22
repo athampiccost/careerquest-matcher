@@ -18,9 +18,11 @@ type RawJob = {
 
 type SkillDefinition = { name: string; aliases: string[] };
 type RoleAffinity = { domain: string; terms: string[]; skills: string[] };
+
 const skillLibrary: SkillDefinition[] = [
-  { name: "Python", aliases: ["python"] }, { name: "JavaScript", aliases: ["javascript", "java script"] }, { name: "TypeScript", aliases: ["typescript", "type script"] }, { name: "React", aliases: ["react", "react.js", "reactjs"] }, { name: "Node.js", aliases: ["node.js", "nodejs", "node js"] }, { name: "FastAPI", aliases: ["fastapi", "fast api"] }, { name: "Java", aliases: ["java"] }, { name: "C#", aliases: ["c#", "csharp"] }, { name: "C++", aliases: ["c++", "cpp"] }, { name: "PHP", aliases: ["php"] }, { name: "Laravel", aliases: ["laravel"] }, { name: "HTML", aliases: ["html", "html5"] }, { name: "CSS", aliases: ["css", "css3"] }, { name: "SQL", aliases: ["sql"] }, { name: "MySQL", aliases: ["mysql"] }, { name: "Oracle", aliases: ["oracle"] }, { name: "MongoDB", aliases: ["mongodb", "mongo db"] }, { name: "Docker", aliases: ["docker"] }, { name: "Kubernetes", aliases: ["kubernetes", "k8s"] }, { name: "Podman", aliases: ["podman"] }, { name: "Jenkins", aliases: ["jenkins"] }, { name: "Git", aliases: ["git", "gitlab", "github", "gerrit"] }, { name: "CI/CD", aliases: ["ci/cd", "ci cd", "continuous integration", "continuous delivery"] }, { name: "AWS", aliases: ["aws", "amazon web services"] }, { name: "Azure", aliases: ["azure"] }, { name: "Linux", aliases: ["linux"] }, { name: "DevOps", aliases: ["devops", "dev ops","SRE","Site Reliability Engineer"] }, { name: "REST APIs", aliases: ["rest api", "restful", "rest api's"] }, { name: "API Integration", aliases: ["api integration", "third-party integrations", "third party integrations"] }, { name: "Data Science", aliases: ["data science", "data scientist"] }, { name: "Machine Learning", aliases: ["machine learning", "ml models"] }, { name: "NLP", aliases: ["nlp", "natural language processing"] }, { name: "LLMs", aliases: ["llm", "large language model", "generative ai", "genai"] }, { name: "RAG", aliases: ["rag", "retrieval augmented generation"] }, { name: "Vector Databases", aliases: ["vector database", "vector databases"] }, { name: "Data Analysis", aliases: ["data analysis", "data analytics"] }, { name: "Agile", aliases: ["agile", "scrum", "sprint"] }, { name: "Jira", aliases: ["jira"] }, { name: "Figma", aliases: ["figma"] }, { name: "Selenium", aliases: ["selenium"] }, { name: "Postman", aliases: ["postman"] }, { name: "Test Automation", aliases: ["test automation", "automated testing", "automation testing"] }, { name: "Manual Testing", aliases: ["manual testing", "test cases", "test plans"] }, { name: "WordPress", aliases: ["wordpress"] }, { name: "Shopify", aliases: ["shopify"] }, { name: "Technical SEO", aliases: ["technical seo", "seo"] }, { name: "Google Ads", aliases: ["google ads", "adwords"] }, { name: "UI/UX", aliases: ["ui/ux", "ux", "user interface", "user experience"] }, { name: "Android", aliases: ["android"] }, { name: "Qt", aliases: ["qt", "qml"] }, { name: "Leadership", aliases: ["leadership", "lead", "mentor", "mentoring"] }, { name: "Communication", aliases: ["communication", "presentation"] }, { name: "Problem Solving", aliases: ["problem solving", "problem-solving"] }, { name: "Project Management", aliases: ["project management", "project manager"] }, { name: "CRM", aliases: ["crm", "salesforce", "hubspot", "pipedrive"] }, { name: "Sales", aliases: ["sales", "business development", "lead generation"] }, { name: "Recruitment", aliases: ["recruitment", "talent acquisition"] }, { name: "MS Office", aliases: ["ms office", "microsoft office", "google workspace"] },{ name: "data modeling", aliases: ["data modeling"] },{ name: "ADF", aliases: ["ADF"] },{ name: "Microsoft SQL Server", aliases: ["Microsoft SQL Server"] },{ name: "Query optimization", aliases: ["Query optimization"] },{ name: "DBA Activities", aliases: ["DBA Activities"] },{ name: "T-SQL", aliases: ["T-SQL"] },{ name: "Azure data platform", aliases: ["Azure data platform"] },{ name: "AI agents", aliases: ["AI agents"] },{ name: "MCP", aliases: ["MCP","mcp"] },{ name: ".NET", aliases: [".NET",".net"] },{ name: "Databricks", aliases: ["Databricks","databricks"] },{ name: "Terraform", aliases: ["Terraform","terraform"] },{ name: "Ansible", aliases: ["Ansible","ansible"] },{ name: "Cloudformation", aliases: ["Cloudformation","Cloudformation"] },{ name: "Requirement Gathering", aliases: ["Requirement Gathering"] },{ name: "Power BI", aliases: ["Power BI"] },{ name: "Power Apps", aliases: ["Power Apps"] },{ name: "Power Automate", aliases: ["Power Automate"] },{ name: "Agile & Scrum Methodologies", aliases: ["Agile","Agile Methodologies","Agile & Scrum Methodologies","Scrum"] },{ name: "Root Cause Analysis (RCA)", aliases: ["Root Cause Analysis","RCA"] },{ name: "procurement / material management", aliases: ["procurement","material management"] },{ name: "ERP Systems", aliases: ["ERP Systems","ERP"] },{ name: "Microsoft Excel", aliases: ["Microsoft Excel","MS Excel"] },{ name: "Microsoft Word", aliases: ["Microsoft Word","MS Word"] },{ name: "Microsoft Word", aliases: ["Microsoft Word","MS Word"] },{ name: "PowerPoint", aliases: ["PowerPoint","powerPoint"] },{ name: "Hardware Engineering", aliases: ["Hardware Engineering"] },{ name: "Networking", aliases: ["Networking"] },{ name: "Spring Boot", aliases: ["spring boot"] },{ name: "Tomcat", aliases: ["Tomcat"] },{ name: "ELK stack", aliases: ["ELK stack"] },{ name: "Kafka", aliases: ["kafka"] },{ name: "Compliance", aliases: ["compliance"] },{ name: "AML/CFT", aliases: ["AML/CFT"] },{ name: "Regulatory Compliance", aliases: ["regulatory compliance"] },{ name: "Financial Crime Compliance", aliases: ["financial crime compliance"] },{ name: "Content Strategy", aliases: ["content strategy"] },{ name: "Storytelling", aliases: ["storytelling"] },{ name: "Audience Engagement", aliases: ["audience engagement"] },{ name: "Creative Thinker", aliases: ["creative thinker","Creative thinker"] },{ name: "Content Creation Tools", aliases: ["Canva","canva","CapCut","Adobe","adobe"] } 
+  { name: "Python", aliases: ["python"] }, { name: "JavaScript", aliases: ["javascript", "java script"] }, { name: "TypeScript", aliases: ["typescript", "type script"] }, { name: "React", aliases: ["react", "react.js", "reactjs"] }, { name: "Node.js", aliases: ["node.js", "nodejs", "node js"] }, { name: "FastAPI", aliases: ["fastapi", "fast api"] }, { name: "Java", aliases: ["java"] }, { name: "C#", aliases: ["c#", "csharp"] }, { name: "C++", aliases: ["c++", "cpp"] }, { name: "PHP", aliases: ["php"] }, { name: "Laravel", aliases: ["laravel"] }, { name: "HTML", aliases: ["html", "html5"] }, { name: "CSS", aliases: ["css", "css3"] }, { name: "SQL", aliases: ["sql"] }, { name: "MySQL", aliases: ["mysql"] }, { name: "Oracle", aliases: ["oracle"] }, { name: "MongoDB", aliases: ["mongodb", "mongo db"] }, { name: "Docker", aliases: ["docker"] }, { name: "Kubernetes", aliases: ["kubernetes", "k8s"] }, { name: "Podman", aliases: ["podman"] }, { name: "Jenkins", aliases: ["jenkins"] }, { name: "Git", aliases: ["git", "gitlab", "github", "gerrit"] }, { name: "CI/CD", aliases: ["ci/cd", "ci cd", "continuous integration", "continuous delivery"] }, { name: "AWS", aliases: ["aws", "amazon web services"] }, { name: "Azure", aliases: ["azure"] }, { name: "Linux", aliases: ["linux"] }, { name: "DevOps", aliases: ["devops", "dev ops"] }, { name: "REST APIs", aliases: ["rest api", "restful", "rest api's"] }, { name: "API Integration", aliases: ["api integration", "third-party integrations", "third party integrations"] }, { name: "Data Science", aliases: ["data science", "data scientist"] }, { name: "Machine Learning", aliases: ["machine learning", "ml models"] }, { name: "NLP", aliases: ["nlp", "natural language processing"] }, { name: "LLMs", aliases: ["llm", "large language model", "generative ai", "genai"] }, { name: "RAG", aliases: ["rag", "retrieval augmented generation"] }, { name: "Vector Databases", aliases: ["vector database", "vector databases"] }, { name: "Data Analysis", aliases: ["data analysis", "data analytics"] }, { name: "Agile", aliases: ["agile", "scrum", "sprint"] }, { name: "Jira", aliases: ["jira"] }, { name: "Figma", aliases: ["figma"] }, { name: "Selenium", aliases: ["selenium"] }, { name: "Postman", aliases: ["postman"] }, { name: "Test Automation", aliases: ["test automation", "automated testing", "automation testing"] }, { name: "Manual Testing", aliases: ["manual testing", "test cases", "test plans"] }, { name: "WordPress", aliases: ["wordpress"] }, { name: "Shopify", aliases: ["shopify"] }, { name: "Technical SEO", aliases: ["technical seo", "seo"] }, { name: "Google Ads", aliases: ["google ads", "adwords"] }, { name: "UI/UX", aliases: ["ui/ux", "ux", "user interface", "user experience"] }, { name: "Android", aliases: ["android"] }, { name: "Qt", aliases: ["qt", "qml"] }, { name: "Leadership", aliases: ["leadership", "lead", "mentor", "mentoring"] }, { name: "Communication", aliases: ["communication", "presentation", "stakeholder"] }, { name: "Problem Solving", aliases: ["problem solving", "problem-solving"] }, { name: "Project Management", aliases: ["project management", "project manager"] }, { name: "CRM", aliases: ["crm", "salesforce", "hubspot", "pipedrive"] }, { name: "Sales", aliases: ["sales", "business development", "lead generation"] }, { name: "Recruitment", aliases: ["recruitment", "talent acquisition"] }, { name: "MS Office", aliases: ["ms office", "microsoft office", "google workspace"] },
 ];
+
 const roleAffinities: RoleAffinity[] = [
   { domain: "Platform & DevOps", terms: ["devops", "platform", "site reliability", "cloud"], skills: ["DevOps", "Docker", "Jenkins", "CI/CD", "AWS", "Linux", "Git"] },
   { domain: "Full-stack Engineering", terms: ["full stack", "frontend", "backend", "software developer", "web developer"], skills: ["React", "Node.js", "JavaScript", "Python", "FastAPI", "REST APIs", "HTML", "CSS"] },
@@ -32,7 +34,14 @@ const approvedJobs = (rawJobs as RawJob[]).filter(job => job.status === "APPROVE
 
 export type JobCatalogueFilters = {
   query?: string;
+  company?: string;
+  position?: string;
+  skill?: string;
   jobType?: "all" | "job_posting" | "walk_in";
+  openDateFrom?: string;
+  openDateTo?: string;
+  closedDateFrom?: string;
+  closedDateTo?: string;
   sortBy?: "latest" | "closing" | "company";
   limit?: number;
 };
@@ -61,13 +70,23 @@ function toJobCatalogueItem(job: RawJob): JobCatalogueItem {
 
 export function browseJobCatalogue(filters: JobCatalogueFilters = {}): JobCatalogueResult {
   const query = filters.query?.trim().toLowerCase() ?? "";
+  const company = filters.company?.trim().toLowerCase() ?? "";
+  const position = filters.position?.trim().toLowerCase() ?? "";
+  const skill = filters.skill?.trim().toLowerCase() ?? "";
   const jobType = filters.jobType ?? "all";
   const sortBy = filters.sortBy ?? "latest";
   const limit = Math.min(60, Math.max(6, filters.limit ?? 12));
+  const isOnOrAfter = (value: string | null, boundary?: string) => !boundary || (value ? value >= boundary : false);
+  const isOnOrBefore = (value: string | null, boundary?: string) => !boundary || (value ? value <= boundary : false);
   const filtered = approvedJobs
     .map(toJobCatalogueItem)
     .filter(job => jobType === "all" || job.jobType === jobType)
     .filter(job => !query || `${job.role} ${job.company} ${job.description} ${job.skills.join(" ")}`.toLowerCase().includes(query))
+    .filter(job => !company || job.company.toLowerCase().includes(company))
+    .filter(job => !position || job.role.toLowerCase().includes(position))
+    .filter(job => !skill || job.skills.some(item => item.toLowerCase().includes(skill)) || job.description.toLowerCase().includes(skill))
+    .filter(job => isOnOrAfter(job.postedDate, filters.openDateFrom) && isOnOrBefore(job.postedDate, filters.openDateTo))
+    .filter(job => isOnOrAfter(job.closingDate, filters.closedDateFrom) && isOnOrBefore(job.closingDate, filters.closedDateTo))
     .sort((left, right) => {
       if (sortBy === "company") return left.company.localeCompare(right.company) || left.role.localeCompare(right.role);
       if (sortBy === "closing") return toTimestamp(left.closingDate, Number.MAX_SAFE_INTEGER) - toTimestamp(right.closingDate, Number.MAX_SAFE_INTEGER);
@@ -116,6 +135,14 @@ function roleBonus(role: string, resumeSkills: Set<string>) {
   return affinity ? Math.min(12, affinity.skills.filter(skill => resumeSkills.has(skill)).length * 2) : 0;
 }
 
+export function calculateMatchScore(coverage: number, matchedSkillCount: number, roleAlignmentBonus: number, experienceScore: number) {
+  // Coverage rewards completeness, while matchedSkillCount rewards broader evidence.
+  // The count is capped so a very long job description cannot dominate the score.
+  const coverageScore = coverage * 44;
+  const matchedSkillCountScore = Math.min(28, matchedSkillCount * 4);
+  return Math.max(8, Math.min(97, Math.round(10 + coverageScore + matchedSkillCountScore + roleAlignmentBonus + experienceScore * 0.14)));
+}
+
 function makeExperienceFit(role: string, candidate: ExperienceProfile, requiredYears: number | null): ExperienceFit {
   const affinity = roleAffinities.find(item => item.terms.some(term => role.toLowerCase().includes(term)));
   const relevantDomains = affinity && candidate.domains.includes(affinity.domain) ? [affinity.domain] : [];
@@ -151,31 +178,6 @@ function makeSkillGaps(matches: JobMatch[]): SkillGap[] {
   } satisfies SkillGap)).sort((left, right) => right.opportunityCount - left.opportunityCount || left.skill.localeCompare(right.skill)).slice(0, 8);
 }
 
-export function calculateMatchScore(
-  coverage: number,
-  matchedSkillCount: number,
-  roleAlignmentBonus: number,
-  experienceScore: number
-) {
-  const coverageScore = coverage * 44;
-  const matchedSkillCountScore = Math.min(28, matchedSkillCount * 4);
-
-  return Math.max(
-    8,
-    Math.min(
-      97,
-      Math.round(
-        10 +
-        coverageScore +
-        matchedSkillCountScore +
-        roleAlignmentBonus +
-        experienceScore * 0.14
-      )
-    )
-  );
-}
-
-
 export function buildCareerAnalysis(resumeText: string, source: CareerAnalysisResult["profile"]["source"]): CareerAnalysisResult {
   const detectedSkills = extractSkills(resumeText);
   const resumeSkillSet = new Set(detectedSkills);
@@ -186,14 +188,12 @@ export function buildCareerAnalysis(resumeText: string, source: CareerAnalysisRe
     const matchedSkills = requiredSkills.filter(skill => resumeSkillSet.has(skill));
     const missingSkills = requiredSkills.filter(skill => !resumeSkillSet.has(skill));
     const coverage = requiredSkills.length ? matchedSkills.length / requiredSkills.length : 0;
-    const technicalEvidence = Math.min(12, matchedSkills.length * 2);
     const experienceFit = makeExperienceFit(job.job_title, experience, extractRequiredYears(jobText));
-    //const score = Math.max(8, Math.min(97, Math.round(10 + coverage * 56 + technicalEvidence + roleBonus(job.job_title, resumeSkillSet) + experienceFit.score * 0.14)));
-    const score = calculateMatchScore(coverage, matchedSkills.length,roleBonus(job.job_title,resumeSkillSet),experienceFit.score)
+    const score = calculateMatchScore(coverage, matchedSkills.length, roleBonus(job.job_title, resumeSkillSet), experienceFit.score);
     return { id: job.id, role: job.job_title, company: job.company_name || "Company not listed", postedDate: job.posted_date || null, url: job.detail_url || null, score, matchedSkills, missingSkills, experienceFit, certificationSignals: extractCertificationSignals(jobText), rationale: createRationale(job.job_title, matchedSkills, missingSkills, score, experienceFit) } satisfies JobMatch;
   }).sort((left, right) => right.score - left.score || right.matchedSkills.length - left.matchedSkills.length || left.role.localeCompare(right.role));
 
-  const topMatches = rankedJobs.slice(0, 50);
+  const topMatches = rankedJobs.slice(0, 25);
   const averageReadiness = topMatches.length ? Math.round(topMatches.reduce((total, match) => total + match.score, 0) / topMatches.length) : 0;
   const coverage = topMatches.length ? Math.round((topMatches.reduce((total, match) => total + match.matchedSkills.length, 0) / Math.max(1, topMatches.reduce((total, match) => total + match.matchedSkills.length + match.missingSkills.length, 0))) * 100) : 0;
   const experienceAlignment = topMatches.length ? Math.round(topMatches.reduce((total, match) => total + match.experienceFit.score, 0) / topMatches.length) : 0;
