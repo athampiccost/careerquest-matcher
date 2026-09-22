@@ -40,6 +40,26 @@ function formatDate(value: string | null) {
 function shareText(job: JobCatalogueItem) {
   return `${job.role} at ${job.company}${job.url ? `\n${job.url}` : ""}`;
 }
+function getJobSource(url: string | null) {
+  if (!url) return "Source not listed";
+
+  try {
+    const hostname = new URL(url).hostname.toLowerCase();
+
+    if (hostname.includes("technopark.in")) {
+      return "Technopark";
+    }
+
+    if (hostname.includes("infopark.in")) {
+      return "Infopark";
+    }
+
+    return hostname.replace(/^www\./, "");
+  } catch {
+    return "Source not listed";
+  }
+}
+
 
 function JobCard({ job }: { job: JobCatalogueItem }) {
   const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(shareText(job))}`;
