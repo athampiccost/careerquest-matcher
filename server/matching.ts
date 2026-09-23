@@ -84,7 +84,7 @@ export function browseJobCatalogue(filters: JobCatalogueFilters = {}): JobCatalo
   const skill = filters.skill?.trim().toLowerCase() ?? "";
   const jobType = filters.jobType ?? "all";
   const sortBy = filters.sortBy ?? "latest";
-  const limit = Math.min(60, Math.max(6, filters.limit ?? 12));
+  const limit = Math.min(60, Math.max(1, filters.limit ?? 24));
   const page = Math.max(1, Math.floor(filters.page ?? 1));
   const isOnOrAfter = (value: string | null, boundary?: string) => !boundary || (value ? value >= boundary : false);
   const isOnOrBefore = (value: string | null, boundary?: string) => !boundary || (value ? value <= boundary : false);

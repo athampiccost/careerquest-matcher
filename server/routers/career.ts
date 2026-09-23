@@ -34,7 +34,8 @@ const jobCatalogueInputSchema = z.object({
   closedDateFrom: z.string().regex(/^\d{4}-\d{2}-\d{2}$/).or(z.literal("")).default(""),
   closedDateTo: z.string().regex(/^\d{4}-\d{2}-\d{2}$/).or(z.literal("")).default(""),
   sortBy: z.enum(["latest", "closing", "company"]).default("latest"),
-  limit: z.number().int().min(6).max(60).default(12),
+  limit: z.number().int().min(1).max(60).default(24),
+  page: z.number().int().min(1).default(1),
 });
 
 const insightRequestSchema = z.object({

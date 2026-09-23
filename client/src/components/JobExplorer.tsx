@@ -117,7 +117,11 @@ export default function JobExplorer() {
 
   const [draftFilters, setDraftFilters] = useState<JobFilters>(emptyFilters);
   const [filters, setFilters] = useState<JobFilters>(emptyFilters);
-  const jobsQuery = trpc.career.browseJobs.useQuery(filters);
+  const jobsQuery = trpc.career.browseJobs.useQuery({
+    ...filters,
+    page: filters.page,
+    limit: filters.limit,
+  });
   const setField = <K extends keyof JobFilters>(key: K, value: JobFilters[K]) => setDraftFilters(current => ({ ...current, [key]: value }));
   const totalPages = Math.max(1, Math.ceil((jobsQuery.data?.total ?? 0) / filters.limit));
   const search = () => setFilters({ ...draftFilters, page: 1 });
