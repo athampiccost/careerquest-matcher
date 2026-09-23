@@ -63,7 +63,7 @@ function getJobSource(url: string | null) {
 
 function JobCard({ job }: { job: JobCatalogueItem }) {
   const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(shareText(job))}`;
-  const linkedInUrl = job.url ? `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(job.url)}` : null;
+  //const linkedInUrl = job.url ? `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(job.url)}` : null;
 
   return <article className="rounded-2xl border border-[#dcebef] bg-white/80 p-5 shadow-[0_8px_24px_rgba(26,90,115,0.06)]">
     <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
@@ -94,10 +94,19 @@ function JobCard({ job }: { job: JobCatalogueItem }) {
       <span className="inline-flex items-center gap-1.5"><CalendarDays className="h-3.5 w-3.5 text-[#2785d2]" /> Opened: {formatDate(job.postedDate)}</span>
       <span className="inline-flex items-center gap-1.5"><CalendarDays className="h-3.5 w-3.5 text-[#ff7568]" /> Closes: {formatDate(job.closingDate)}</span>
     </div>
+    
     <div className="mt-5 flex flex-wrap gap-2 border-t border-[#e5f0f2] pt-4">
-      <a href={whatsappUrl} target="_blank" rel="noreferrer" className="inline-flex min-h-9 items-center gap-1.5 rounded-lg bg-[#e8f9ee] px-3 text-xs font-bold text-[#218a4d] transition-colors hover:bg-[#d3f3df]"><MessageCircle className="h-3.5 w-3.5" /> WhatsApp</a>
-      {linkedInUrl && <a href={linkedInUrl} target="_blank" rel="noreferrer" className="inline-flex min-h-9 items-center gap-1.5 rounded-lg bg-[#e7f2ff] px-3 text-xs font-bold text-[#216fc9] transition-colors hover:bg-[#d7eaff]"><Linkedin className="h-3.5 w-3.5" /> LinkedIn</a>}
+      <a
+        href={whatsappUrl}
+        target="_blank"
+        rel="noreferrer"
+        className="inline-flex min-h-9 items-center gap-1.5 rounded-lg bg-[#e8f9ee] px-3 text-xs font-bold text-[#218a4d] transition-colors hover:bg-[#d3f3df]"
+      >
+        <MessageCircle className="h-3.5 w-3.5" />
+        WhatsApp
+      </a>
     </div>
+
   </article>;
 }
 
