@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { BriefcaseBusiness, CalendarDays, Linkedin, MessageCircle, RotateCcw, Search, SlidersHorizontal } from "lucide-react";
+import { BriefcaseBusiness, CalendarDays, ChevronLeft, ChevronRight, Linkedin, MessageCircle, RotateCcw, Search, SlidersHorizontal } from "lucide-react";
 import { trpc } from "@/lib/trpc";
 import type { JobCatalogueItem } from "@shared/career";
 
@@ -15,6 +15,7 @@ type JobFilters = {
   closedDateTo: string;
   sortBy: "latest" | "closing" | "company";
   limit: number;
+  page: number;
 };
 
 const emptyFilters: JobFilters = {
@@ -29,6 +30,7 @@ const emptyFilters: JobFilters = {
   closedDateTo: "",
   sortBy: "latest",
   limit: 24,
+  page: 1,
 };
 
 function formatDate(value: string | null) {
@@ -117,7 +119,9 @@ export default function JobExplorer() {
   const [filters, setFilters] = useState<JobFilters>(emptyFilters);
   const jobsQuery = trpc.career.browseJobs.useQuery(filters);
   const setField = <K extends keyof JobFilters>(key: K, value: JobFilters[K]) => setDraftFilters(current => ({ ...current, [key]: value }));
-  const search = () => setFilters({ ...draftFilters });
+  const totalPages = Math.max(1, Math.ceil((jobsQuery.data?.total ?? 0) / filters.limit));
+  const search = () => setFilters({ ...draftFilters, page: 1 });
+  const goToPage = (page: number) => setFilters(current => ({ ...current, page: Math.min(totalPages, Math.max(1, page)) }));
   const reset = () => { setDraftFilters(emptyFilters); setFilters(emptyFilters); };
 
   return <section className="mb-9 rounded-[1.7rem] border border-white/90 bg-white/75 p-6 shadow-[0_18px_44px_rgba(18,79,110,0.08)] backdrop-blur-xl sm:p-7">
@@ -185,6 +189,6 @@ export default function JobExplorer() {
     </div>
     <div className="mt-4 flex flex-wrap gap-2"><button type="button" onClick={search} className="inline-flex min-h-10 items-center gap-2 rounded-lg bg-[#173b55] px-4 text-sm font-bold text-white shadow-[4px_5px_0_#4dd7cb] transition-transform hover:-translate-y-0.5 active:translate-y-0"><SlidersHorizontal className="h-4 w-4" /> Search jobs</button><button type="button" onClick={reset} className="inline-flex min-h-10 items-center gap-2 rounded-lg border border-[#cfe5e8] bg-white px-4 text-sm font-semibold text-[#547687] hover:bg-[#f4fbfb]"><RotateCcw className="h-4 w-4" /> Reset</button></div>
 
-    {jobsQuery.isLoading ? <p className="mt-7 text-sm text-[#668798]">Loading job listings…</p> : jobsQuery.isError ? <p className="mt-7 rounded-xl bg-[#fff0ed] p-4 text-sm text-[#a84d43]">Job listings are temporarily unavailable. Please try again.</p> : jobsQuery.data?.jobs.length ? <div className="mt-7 grid gap-4 lg:grid-cols-2">{jobsQuery.data.jobs.map(job => <JobCard key={job.id} job={job} />)}</div> : <p className="mt-7 rounded-xl bg-[#f0faf9] p-4 text-sm text-[#52798c]">No jobs matched these filters. Try removing a filter or changing the dates.</p>}
+    {jobsQuery.isLoading ? <p className="mt-7 text-sm text-[#668798]">Loading job listings…</p> : jobsQuery.isError ? <p className="mt-7 rounded-xl bg-[#fff0ed] p-4 text-sm text-[#a84d43]">Job listings are temporarily unavailable. Please try again.</p> : jobsQuery.data?.jobs.length ? <><div className="mt-7 grid gap-4 lg:grid-cols-2">{jobsQuery.data.jobs.map(job => <JobCard key={job.id} job={job} />)}</div><div className="mt-7 flex flex-wrap items-center justify-between gap-3 border-t border-[#e5f0f2] pt-4"><p className="text-xs text-[#668798]">Page {filters.page} of {totalPages} · Showing {jobsQuery.data.jobs.length} of {jobsQuery.data.total} jobs</p><div className="flex items-center gap-2"><button type="button" onClick={() => goToPage(filters.page - 1)} disabled={filters.page === 1} className="inline-flex min-h-9 items-center gap-1 rounded-lg border border-[#cfe5e8] bg-white px-3 text-xs font-semibold text-[#547687] transition hover:bg-[#f4fbfb] disabled:cursor-not-allowed disabled:opacity-40"><ChevronLeft className="h-4 w-4" /> Previous</button><button type="button" onClick={() => goToPage(filters.page + 1)} disabled={filters.page >= totalPages} className="inline-flex min-h-9 items-center gap-1 rounded-lg border border-[#cfe5e8] bg-white px-3 text-xs font-semibold text-[#547687] transition hover:bg-[#f4fbfb] disabled:cursor-not-allowed disabled:opacity-40">Next <ChevronRight className="h-4 w-4" /></button></div></div></> : <p className="mt-7 rounded-xl bg-[#f0faf9] p-4 text-sm text-[#52798c]">No jobs matched these filters. Try removing a filter or changing the dates.</p>}
   </section>;
 }

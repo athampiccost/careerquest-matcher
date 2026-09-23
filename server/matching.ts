@@ -16,6 +16,9 @@ type RawJob = {
   walk_in_address?: string;
 };
 
+
+
+
 type SkillDefinition = { name: string; aliases: string[] };
 type RoleAffinity = { domain: string; terms: string[]; skills: string[] };
 
@@ -32,6 +35,7 @@ const roleAffinities: RoleAffinity[] = [
 
 const approvedJobs = (rawJobs as RawJob[]).filter(job => job.status === "APPROVED" && Boolean(job.job_description) && Boolean(job.job_title));
 
+
 export type JobCatalogueFilters = {
   query?: string;
   company?: string;
@@ -44,7 +48,12 @@ export type JobCatalogueFilters = {
   closedDateTo?: string;
   sortBy?: "latest" | "closing" | "company";
   limit?: number;
+  page?: number;
 };
+
+
+
+
 
 function toTimestamp(value: string | null | undefined, fallback: number) {
   if (!value) return fallback;
@@ -76,6 +85,7 @@ export function browseJobCatalogue(filters: JobCatalogueFilters = {}): JobCatalo
   const jobType = filters.jobType ?? "all";
   const sortBy = filters.sortBy ?? "latest";
   const limit = Math.min(60, Math.max(6, filters.limit ?? 12));
+  const page = Math.max(1, Math.floor(filters.page ?? 1));
   const isOnOrAfter = (value: string | null, boundary?: string) => !boundary || (value ? value >= boundary : false);
   const isOnOrBefore = (value: string | null, boundary?: string) => !boundary || (value ? value <= boundary : false);
   const filtered = approvedJobs
@@ -92,7 +102,8 @@ export function browseJobCatalogue(filters: JobCatalogueFilters = {}): JobCatalo
       if (sortBy === "closing") return toTimestamp(left.closingDate, Number.MAX_SAFE_INTEGER) - toTimestamp(right.closingDate, Number.MAX_SAFE_INTEGER);
       return toTimestamp(right.postedDate, 0) - toTimestamp(left.postedDate, 0);
     });
-  return { jobs: filtered.slice(0, limit), total: filtered.length };
+  const start = (page - 1) * limit;
+  return { jobs: filtered.slice(start, start + limit), total: filtered.length };
 }
 
 export function getJobFilterOptions() {
