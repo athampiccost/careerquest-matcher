@@ -126,7 +126,7 @@ export default function JobExplorer() {
 
   return <section className="mb-9 rounded-[1.7rem] border border-white/90 bg-white/75 p-6 shadow-[0_18px_44px_rgba(18,79,110,0.08)] backdrop-blur-xl sm:p-7">
     <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
-      <div><p className="mono-label text-[10px] text-[#168f87]">Normal job search</p><h2 className="mt-1 text-2xl font-bold tracking-[-0.055em] text-[#18384f]">Find a role by company, position, skill, or date</h2><p className="mt-2 max-w-3xl text-sm leading-5 text-[#668798]">Search the backend job catalogue without uploading a resume. Share any listing directly on WhatsApp or LinkedIn.</p></div>
+      <div><p className="mono-label text-[10px] text-[#168f87]">Normal job search</p><h2 className="mt-1 text-2xl font-bold tracking-[-0.055em] text-[#18384f]">Find a role by company, position, skill, or date</h2><p className="mt-2 max-w-3xl text-sm leading-5 text-[#668798]">Search the backend job catalogue without uploading a resume. Share any listing directly on WhatsApp.</p></div>
       <span className="inline-flex shrink-0 items-center gap-1.5 text-xs font-semibold text-[#668798]"><BriefcaseBusiness className="h-4 w-4 text-[#2785d2]" /> {jobsQuery.data?.total ?? 0} results</span>
     </div>
 
