@@ -95,6 +95,31 @@ export function browseJobCatalogue(filters: JobCatalogueFilters = {}): JobCatalo
   return { jobs: filtered.slice(0, limit), total: filtered.length };
 }
 
+export function getJobFilterOptions() {
+  const companies = new Set<string>();
+  const positions = new Set<string>();
+
+  approvedJobs.forEach((job) => {
+    const company = job.company_name?.trim();
+    const position = job.job_title?.trim();
+
+    if (company) companies.add(company);
+    if (position) positions.add(position);
+  });
+
+  return {
+    companies: Array.from(companies).sort((a, b) =>
+      a.localeCompare(b),
+    ),
+    positions: Array.from(positions).sort((a, b) =>
+      a.localeCompare(b),
+    ),
+  };
+}
+
+
+
+
 function escapeRegExp(value: string) { return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"); }
 function containsAlias(text: string, alias: string) { return new RegExp(`(^|[^a-z0-9])${escapeRegExp(alias.toLowerCase())}($|[^a-z0-9])`, "i").test(text); }
 

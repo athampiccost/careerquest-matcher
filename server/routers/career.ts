@@ -1,6 +1,13 @@
 import { TRPCError } from "@trpc/server";
 import { z } from "zod";
-import { browseJobCatalogue, buildCareerAnalysis, suppliedExampleAnalysis } from "../matching";
+
+import {
+  browseJobCatalogue,
+  buildCareerAnalysis,
+  getJobFilterOptions,
+  suppliedExampleAnalysis,
+} from "../matching";
+
 import { extractResumeTextFromPdf } from "../resumePdf";
 import { getTutorialRecommendations, getTutorialRecommendationsForText } from "../tutorials";
 import type { CareerInsight, JobMatch, SkillGap } from "../../shared/career";
@@ -207,6 +214,10 @@ export const careerRouter = router({
   browseJobs: publicProcedure.input(jobCatalogueInputSchema).query(({ input }) => {
     return browseJobCatalogue(input);
   }),
+  getJobFilterOptions: publicProcedure.query(() => {
+    return getJobFilterOptions();
+  }),
+
 
   getAIInsights: publicProcedure.input(insightRequestSchema).mutation(async ({ input }) => {
     if (!process.env.OPENAI_API_KEY) {

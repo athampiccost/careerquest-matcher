@@ -102,6 +102,8 @@ function JobCard({ job }: { job: JobCatalogueItem }) {
 }
 
 export default function JobExplorer() {
+  const jobOptionsQuery = trpc.career.getJobFilterOptions.useQuery();
+
   const [draftFilters, setDraftFilters] = useState<JobFilters>(emptyFilters);
   const [filters, setFilters] = useState<JobFilters>(emptyFilters);
   const jobsQuery = trpc.career.browseJobs.useQuery(filters);
@@ -117,8 +119,53 @@ export default function JobExplorer() {
 
     <div className="mt-6 grid gap-3 md:grid-cols-2 xl:grid-cols-4">
       <label className="md:col-span-2"><span className="mono-label mb-1.5 block text-[9px] text-[#577d8e]">Any keyword</span><span className="relative block"><Search className="pointer-events-none absolute left-3 top-3 h-4 w-4 text-[#7ca0ae]" /><input value={draftFilters.query} onChange={event => setField("query", event.target.value)} placeholder="Search jobs, company, or description" className="h-10 w-full rounded-lg border border-[#d6e9ed] bg-white pl-9 pr-3 text-sm outline-none transition focus:border-[#53c9c1] focus:ring-2 focus:ring-[#53c9c1]/20" /></span></label>
-      <label><span className="mono-label mb-1.5 block text-[9px] text-[#577d8e]">Company</span><input value={draftFilters.company} onChange={event => setField("company", event.target.value)} placeholder="e.g. Techversant" className="h-10 w-full rounded-lg border border-[#d6e9ed] bg-white px-3 text-sm outline-none transition focus:border-[#53c9c1] focus:ring-2 focus:ring-[#53c9c1]/20" /></label>
-      <label><span className="mono-label mb-1.5 block text-[9px] text-[#577d8e]">Position</span><input value={draftFilters.position} onChange={event => setField("position", event.target.value)} placeholder="e.g. DevOps Engineer" className="h-10 w-full rounded-lg border border-[#d6e9ed] bg-white px-3 text-sm outline-none transition focus:border-[#53c9c1] focus:ring-2 focus:ring-[#53c9c1]/20" /></label>
+      
+      
+      <label>
+        <span className="mono-label mb-1.5 block text-[9px] text-[#577d8e]">
+          Company
+        </span>
+
+        <select
+          value={draftFilters.company}
+          onChange={(event) =>
+            setField("company", event.target.value)
+          }
+          className="h-10 w-full rounded-lg border border-[#d6e9ed] bg-white px-3 text-sm outline-none transition focus:border-[#53c9c1] focus:ring-2 focus:ring-[#53c9c1]/20"
+        >
+          <option value="">All companies</option>
+
+          {jobOptionsQuery.data?.companies.map((company) => (
+            <option key={company} value={company}>
+              {company}
+            </option>
+          ))}
+        </select>
+      </label>
+      
+      <label>
+        <span className="mono-label mb-1.5 block text-[9px] text-[#577d8e]">
+          Position
+        </span>
+
+        <select
+          value={draftFilters.position}
+          onChange={(event) =>
+            setField("position", event.target.value)
+          }
+          className="h-10 w-full rounded-lg border border-[#d6e9ed] bg-white px-3 text-sm outline-none transition focus:border-[#53c9c1] focus:ring-2 focus:ring-[#53c9c1]/20"
+        >
+          <option value="">All positions</option>
+
+          {jobOptionsQuery.data?.positions.map((position) => (
+            <option key={position} value={position}>
+              {position}
+            </option>
+          ))}
+        </select>
+      </label>
+
+      
       <label><span className="mono-label mb-1.5 block text-[9px] text-[#577d8e]">Skillset</span><input value={draftFilters.skill} onChange={event => setField("skill", event.target.value)} placeholder="e.g. Docker, React" className="h-10 w-full rounded-lg border border-[#d6e9ed] bg-white px-3 text-sm outline-none transition focus:border-[#53c9c1] focus:ring-2 focus:ring-[#53c9c1]/20" /></label>
       <label><span className="mono-label mb-1.5 block text-[9px] text-[#577d8e]">Job kind</span><select value={draftFilters.jobType} onChange={event => setField("jobType", event.target.value as JobFilters["jobType"])} className="h-10 w-full rounded-lg border border-[#d6e9ed] bg-white px-3 text-sm outline-none focus:border-[#53c9c1]"><option value="all">All kinds</option><option value="job_posting">Job posting</option><option value="walk_in">Walk-in</option></select></label>
       <label><span className="mono-label mb-1.5 block text-[9px] text-[#577d8e]">Open date from</span><input type="date" value={draftFilters.openDateFrom} onChange={event => setField("openDateFrom", event.target.value)} className="h-10 w-full rounded-lg border border-[#d6e9ed] bg-white px-3 text-sm outline-none focus:border-[#53c9c1]" /></label>
